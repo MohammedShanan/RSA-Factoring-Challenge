@@ -14,7 +14,7 @@ def factors(num):
     if num % 2 == 0:
         return 2, num // 2
     n = 3
-    while True:
+    for i in range(3, num):
         if num % n == 0:
             return n, num // n
         n += 2

@@ -1,20 +1,19 @@
-#include<stdio.h>
-#include "unistd.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+#include <stdio.h>
 #include <stdlib.h>
-int main(int argc, char *argv[])
+#include <stdint.h>
+int main(void)
 {
-    int fd;
-    if (argc == 2)
+    char *eptr;
+    FILE *fp = fopen("t.txt", "r");
+    if (fp == NULL)
     {
-        fd = open(argv[1], O_RDONLY);
-        if (fd == -1)
-        {
-            return (0);
-        }
-        
+        perror("Unable to open file!");
+        exit(1);
     }
-    return 0;
+    char chunk[128];
+    while (fgets(chunk, sizeof(chunk), fp) != NULL)
+    {
+        printf("%d\n", strtoull(chunk, &eptr, 10) * 2);
+    }
+    fclose(fp);
 }
