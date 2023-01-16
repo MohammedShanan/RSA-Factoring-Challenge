@@ -13,11 +13,9 @@ def main():
 def factors(num):
     if num % 2 == 0:
         return 2, num // 2
-    n = 3
-    for i in range(3, num):
-        if num % n == 0:
-            return n, num // n
-        n += 2
+    for i in range(3, num, 2):
+        if num % i == 0:
+            return i, num // i
 
 
 if __name__ == "__main__":
